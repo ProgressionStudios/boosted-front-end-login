@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name:       Boosted Front-end Login, Registration, & Password Reset
- * Description:       
+ * Plugin Name:       Boosted Front-end Login
+ * Description:       Add a Front-end Login, Registration, & Password Reset
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Version:           0.1.0
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function boosted_front_end_login_block_init() {
-	register_block_type( __DIR__ . '/build' );
+	register_block_type( __DIR__ . '/build/login' );
 }
 add_action( 'init', 'boosted_front_end_login_block_init' );
 
