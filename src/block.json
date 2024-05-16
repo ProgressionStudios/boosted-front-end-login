@@ -4,7 +4,7 @@
 	"name": "boosted/boosted-front-end-login",
 	"version": "0.1.0",
 	"title": "Login",
-	"category": "widgets",
+	"category": "boosted-login",
 	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
