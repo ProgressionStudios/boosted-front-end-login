@@ -5,9 +5,7 @@
 	"version": "0.1.0",
 	"title": "Login",
 	"category": "boosted-login",
-	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
-	"example": {},
+	"description": "Front-end login form",
 	"supports": {
 		"html": false
 	},
