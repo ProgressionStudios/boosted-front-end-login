@@ -26,6 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function custom_block_init() {
 	register_block_type( __DIR__ . '/build/login' );
+    register_block_type( __DIR__ . '/build/lost-password' );
 }
 add_action( 'init', __NAMESPACE__ . '\\custom_block_init' );
 
@@ -44,26 +45,9 @@ function block_categories( $block_categories, $editor_context ) {
 }
 add_filter( 'block_categories_all', __NAMESPACE__ . '\\block_categories', 10, 2 );
 
-function front_end_login() {
-    if (isset($_POST['username']) && isset($_POST['password'])) {
-        $creds = array(
-            'user_login' => $_POST['username'],
-            'user_password' => $_POST['password'],
-            'remember' => isset($_POST['remember']) && $_POST['remember'] === 'forever'
-        );
+require_once plugin_dir_path(__FILE__) . 'includes/login.php';
 
-        $user = wp_signon($creds, false);
 
-        if (is_wp_error($user)) {
-            $_SESSION['login_error'] = $user->get_error_message();
-            wp_redirect($_SERVER['HTTP_REFERER']);
-            exit;
-        } else {
-            wp_redirect(home_url());
-            exit;
-        }
-    }
-    return null;
-}
-add_action('admin_post_nopriv_front_end_login', __NAMESPACE__ . '\\front_end_login');
-add_action('admin_post_front_end_login', __NAMESPACE__ . '\\front_end_login'); 
+require_once plugin_dir_path(__FILE__) . 'includes/lost-password.php';
+	add_filter('lostpassword_url', __NAMESPACE__ . '\\lostpassword_page_link');
+	register_activation_hook( __FILE__, __NAMESPACE__ . '\\create_lost_password_page' );
