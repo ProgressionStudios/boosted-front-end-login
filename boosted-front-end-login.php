@@ -27,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function custom_block_init() {
 	register_block_type( __DIR__ . '/build/login' );
     register_block_type( __DIR__ . '/build/lost-password' );
+	register_block_type( __DIR__ . '/build/registration' );
 }
 add_action( 'init', __NAMESPACE__ . '\\custom_block_init' );
 
@@ -45,9 +46,12 @@ function block_categories( $block_categories, $editor_context ) {
 }
 add_filter( 'block_categories_all', __NAMESPACE__ . '\\block_categories', 10, 2 );
 
+require_once plugin_dir_path(__FILE__) . 'includes/page-activation.php';
+register_activation_hook( __FILE__, __NAMESPACE__ . '\\create_login_pages' );
+add_filter('lostpassword_url', __NAMESPACE__ . '\\lostpassword_page_link');
+add_filter('register_url', __NAMESPACE__ . '\\registration_page_link');
+
+//Form specific code
 require_once plugin_dir_path(__FILE__) . 'includes/login.php';
-
-
 require_once plugin_dir_path(__FILE__) . 'includes/lost-password.php';
-	add_filter('lostpassword_url', __NAMESPACE__ . '\\lostpassword_page_link');
-	register_activation_hook( __FILE__, __NAMESPACE__ . '\\create_lost_password_page' );
+require_once plugin_dir_path(__FILE__) . 'includes/registration.php';

@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "boosted/boosted-registration",
+	"version": "0.1.0",
+	"title": "User Registration",
+	"category": "boosted-login",
+	"icon": "smiley",
+	"description": "User Registration form",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "boosted-front-end-login",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}

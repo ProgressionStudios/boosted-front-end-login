@@ -3,7 +3,7 @@ import './style.scss';
 import Edit from './edit';
 import metadata from './block.json';
 
-const loginIcon = () => {
+const lostpwIcon = () => {
 	return (
 		<svg width="800px" height="800px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
 			<g id="Layer_2" data-name="Layer 2">
@@ -24,6 +24,6 @@ registerBlockType( metadata.name, {
 	 */
 	edit: Edit,
 
-	icon: loginIcon,
+	icon: lostpwIcon,
 
 } );
