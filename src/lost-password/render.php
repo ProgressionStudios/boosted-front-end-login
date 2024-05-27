@@ -1,19 +1,42 @@
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
     <?php if (isset($_SESSION['lost_password_error'])): ?>
+        <?php 
+            $allowed_html = array(
+                'a' => array(
+                    'href' => array(),
+                    'title' => array()
+                ),
+                'br' => array(),
+                'em' => array(),
+                'strong' => array(),
+            );
+        ?>
         <div class="boosted-front-end-login-error" role="alert">
-            <?php echo $_SESSION['lost_password_error']; ?>
+            <?php echo wp_kses($_SESSION['lost_password_error'], $allowed_html); ?>
             <?php unset($_SESSION['lost_password_error']); ?>
         </div>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['lost_password_message'])): ?>
+        <?php 
+            $allowed_html = array(
+                'a' => array(
+                    'href' => array(),
+                    'title' => array()
+                ),
+                'br' => array(),
+                'em' => array(),
+                'strong' => array(),
+            );
+        ?>
         <div class="boosted-front-end-login-success" role="alert">
-            <?php echo $_SESSION['lost_password_message']; ?>
+            <?php echo wp_kses($_SESSION['lost_password_message'], $allowed_html); ?>
             <?php unset($_SESSION['lost_password_message']); ?>
         </div>
     <?php endif; ?>
 
     <form class="boosted-front-end-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="Lost-Password-Form">
+        <?php wp_nonce_field( 'front_end_lost_password_action', 'front_end_lost_password_nonce' ); ?>
         <input type="hidden" name="action" value="front_end_lost_password">
 		<p><?php esc_html_e('Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'boosted-front-end-login'); ?></p>
         <p>

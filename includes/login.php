@@ -12,6 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function front_end_login() {
     if (isset($_POST['username']) && isset($_POST['password'])) {
+
+        if ( ! isset( $_POST['front_end_login_nonce'] ) || ! wp_verify_nonce( $_POST['front_end_login_nonce'], 'front_end_login_action' ) ) {
+            wp_die( esc_html__( 'Nonce verification failed', 'boosted-front-end-login' ) );
+        }
+
         $creds = array(
             'user_login' => $_POST['username'],
             'user_password' => $_POST['password'],

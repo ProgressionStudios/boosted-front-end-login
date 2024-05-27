@@ -12,6 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function front_end_lost_password() {
     if (isset($_POST['user_login'])) {
+        if ( ! isset( $_POST['front_end_lost_password_nonce'] ) || ! wp_verify_nonce( $_POST['front_end_lost_password_nonce'], 'front_end_lost_password_action' ) ) {
+            wp_die( esc_html__( 'Nonce verification failed', 'boosted-front-end-login' ) );
+        }
+
         $user_login = sanitize_text_field($_POST['user_login']);
         $user = get_user_by('login', $user_login);
         if (!$user && strpos($user_login, '@')) {
