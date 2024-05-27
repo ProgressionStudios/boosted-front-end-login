@@ -1,4 +1,4 @@
-<div <?php echo get_block_wrapper_attributes(); ?>>
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
     <?php if (isset($_SESSION['lost_password_error'])): ?>
         <div class="boosted-front-end-login-error" role="alert">
             <?php echo $_SESSION['lost_password_error']; ?>
