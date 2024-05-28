@@ -17,21 +17,24 @@
 	?>
 	</p>
 <?php else: ?>
-	<?php if (isset($_SESSION['login_error'])): ?>
-		<?php 
-            $allowed_html = array(
-                'a' => array(
-                    'href' => array(),
-                    'title' => array()
-                ),
-                'br' => array(),
-                'em' => array(),
-                'strong' => array(),
-            );
-        ?>
+	<?php
+        $user_id = get_current_user_id();
+        $login_error = get_transient( 'login_error_' . $user_id );
+
+        if ( $login_error ) :
+		$allowed_html = array(
+			'a' => array(
+				'href' => array(),
+				'title' => array()
+			),
+			'br' => array(),
+			'em' => array(),
+			'strong' => array(),
+		);
+    ?>
 		<div class="boosted-front-end-login-error" role="alert">
-			<?php echo wp_kses($_SESSION['login_error'], $allowed_html); ?>
-			<?php unset($_SESSION['login_error']); ?>
+			<?php echo wp_kses( $login_error, $allowed_html ); ?>
+            <?php delete_transient( 'login_error_' . $user_id ); ?>
 		</div>
 	<?php endif; ?>
     <form class="boosted-front-end-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="Login-Form">
@@ -55,7 +58,9 @@
 		</p>
 		<nav class="class="boosted-front-end-navigation">
 			<?php if ( get_option('users_can_register') ): ?>	
-				<a class="boosted-front-end-navigation-register" href="<?php echo esc_url( wp_registration_url() ); ?>"><?php esc_html_e( 'Register', 'boosted-front-end-login' ); ?></a> | 
+				<a class="boosted-front-end-navigation-register" href="<?php echo esc_url( wp_registration_url() ); ?>">
+					<?php esc_html_e( 'Register', 'boosted-front-end-login' ); ?>
+				</a> | 
 			<?php endif; ?>
 			<a class="boosted-front-end-navigation-lost" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( 'Lost Password?', 'boosted-front-end-login' ); ?></a>
 		</nav>

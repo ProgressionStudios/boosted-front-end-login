@@ -16,10 +16,6 @@
 
 namespace BoostedLogin;
 
-if (!session_id()) {
-    session_start();
-}
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }

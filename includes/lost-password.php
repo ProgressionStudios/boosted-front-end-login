@@ -35,18 +35,18 @@ function front_end_lost_password() {
                 $message .= '<' . $reset_url . ">\r\n";
 
                 if (wp_mail($user->user_email, __('Password Reset Request', 'boosted-front-end-login'), $message)) {
-                    $_SESSION['lost_password_message'] = __('Password reset email has been sent.', 'boosted-front-end-login');
+                    set_transient( 'lost_password_message_' . get_current_user_id(), __('Password reset email has been sent.', 'boosted-front-end-login'), 60 );
                 } else {
-                    $_SESSION['lost_password_error'] = __('Failed to send password reset email.', 'boosted-front-end-login');
+                    set_transient( 'lost_password_error_' . get_current_user_id(), __('Failed to send password reset email.', 'boosted-front-end-login'), 60 );
                 }
             } else {
-                $_SESSION['lost_password_error'] = $reset_key->get_error_message();
+                set_transient( 'lost_password_error_' . get_current_user_id(), $reset_key->get_error_message(), 60 );
             }
         } else {
-            $_SESSION['lost_password_error'] = __('Invalid username or email.', 'boosted-front-end-login');
+            set_transient( 'lost_password_error_' . get_current_user_id(), __('Invalid username or email.', 'boosted-front-end-login'), 60 );
         }
     }
-    wp_redirect($_SERVER['HTTP_REFERER']);
+    wp_redirect( esc_url_raw( $_SERVER['HTTP_REFERER'] ) );
     exit;
 }
 add_action('admin_post_nopriv_front_end_lost_password', __NAMESPACE__ . '\\front_end_lost_password');
