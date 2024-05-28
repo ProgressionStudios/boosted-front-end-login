@@ -5,7 +5,12 @@ import metadata from './block.json';
 
 const lostpwIcon = () => {
 	return (
-		<svg width="800px" height="800px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+		<svg
+			width="800px"
+			height="800px"
+			viewBox="0 0 48 48"
+			xmlns="http://www.w3.org/2000/svg"
+		>
 			<g id="Layer_2" data-name="Layer 2">
 				<g id="invisible_box" data-name="invisible box">
 					<rect width="48" height="48" fill="none" />
@@ -25,5 +30,4 @@ registerBlockType( metadata.name, {
 	edit: Edit,
 
 	icon: lostpwIcon,
-
 } );

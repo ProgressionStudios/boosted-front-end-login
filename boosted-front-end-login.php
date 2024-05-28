@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Boosted Front-end Login
- * Description:       Add a Front-end Login, Registration, & Password Reset
+ * Description:       Add a Front-end Login, Registration, & Password Reset blocks
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Version:           0.1.0
@@ -33,7 +33,7 @@ function block_categories( $block_categories, $editor_context ) {
 			$block_categories,
 			array(
 				'slug'  => 'boosted-login',
-				'title' => __( 'Boosted Login', 'boosted-front-end-login' ),
+				'title' => __( 'Boosted Front-end Login', 'boosted-front-end-login' ),
 				'icon'  => null,
 			)
 		);

@@ -1,4 +1,4 @@
-# Boosted Front-end Login, Registration, & Password Reset
+# Boosted Front-end Login, Registration, & Password Reset blocks
 
 Example block scaffolded with Create Block tool.
 
