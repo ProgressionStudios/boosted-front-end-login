@@ -47,7 +47,7 @@ register_activation_hook( __FILE__, __NAMESPACE__ . '\\create_login_pages' );
 add_filter('lostpassword_url', __NAMESPACE__ . '\\lostpassword_page_link');
 add_filter('register_url', __NAMESPACE__ . '\\registration_page_link');
 
-//Form specific code
+//Form posting and error handling code
 require_once plugin_dir_path(__FILE__) . 'includes/login.php';
 require_once plugin_dir_path(__FILE__) . 'includes/lost-password.php';
 require_once plugin_dir_path(__FILE__) . 'includes/registration.php';

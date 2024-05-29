@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-function boosted_check_if_page_exists($title, $content, $option_name) {
+function check_if_page_exists($title, $content, $option_name) {
     $query = new \WP_Query( array(
         'post_type'      => 'page',
         'post_status'    => 'publish',
@@ -38,9 +38,9 @@ function boosted_check_if_page_exists($title, $content, $option_name) {
 }
 
 function create_login_pages() {
-    boosted_check_if_page_exists('Login', '<!-- wp:boosted/boosted-front-end-login /-->', 'boosted_login_page_id');
-    boosted_check_if_page_exists('Lost Password?', '<!-- wp:boosted/boosted-lost-password /-->', 'boosted_lost_password_page_id');
-    boosted_check_if_page_exists('Register', '<!-- wp:boosted/boosted-registration /-->', 'boosted_registration_page_id');
+    check_if_page_exists('Login', '<!-- wp:boosted/boosted-front-end-login /-->', 'boosted_login_page_id');
+    check_if_page_exists('Lost Password?', '<!-- wp:boosted/boosted-lost-password /-->', 'boosted_lost_password_page_id');
+    check_if_page_exists('Register', '<!-- wp:boosted/boosted-registration /-->', 'boosted_registration_page_id');
 }
 
 function lostpassword_page_link($lostpassword_url) {
