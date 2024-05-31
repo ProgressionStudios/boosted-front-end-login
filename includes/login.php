@@ -10,14 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-function show_login_error() {
-    if ( $error = get_transient( 'login_error_' . get_current_user_id() ) ) {
-        echo '<div class="login-error">' . esc_html( $error ) . '</div>';
-        delete_transient( 'login_error_' . get_current_user_id() );
-    }
-}
-add_action( 'login_form', __NAMESPACE__ . '\\show_login_error' );
-
 function front_end_login() {
     if (isset($_POST['username']) && isset($_POST['password'])) {
 
