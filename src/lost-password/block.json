@@ -7,6 +7,24 @@
 	"category": "boosted-login",
 	"icon": "smiley",
 	"description": "Lost password form",
+	"attributes": {
+		"lostDescription": {
+			"type": "string",
+			"default": "Lost your password? Please enter your username or email address. You will receive a link to create a new password via email."
+		},
+		"usernameLabel": {
+			"type": "string",
+			"default": "Username or Email"
+		},
+		"usernamePlaceholder": {
+			"type": "string",
+			"default": ""
+		},
+		"resetButtonLabel": {
+			"type": "string",
+			"default": "Reset Password"
+		}
+	},
 	"example": {},
 	"supports": {
 		"html": false
