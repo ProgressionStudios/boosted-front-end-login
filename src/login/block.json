@@ -41,6 +41,10 @@
 		"lostPasswordLabel": {
 			"type": "string",
 			"default": "Lost Password?"
+		},
+		"uniqueId": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"textdomain": "boosted-front-end-login",

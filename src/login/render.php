@@ -18,10 +18,10 @@
 		</p>
 	<?php else: ?>
 		<?php
-		$user_id = get_current_user_id();
-		$login_error = get_transient( 'login_error_' . $user_id );
+    	$form_id = $attributes['uniqueId'];
+        $login_error = get_transient('login_error_' . $form_id);
 
-		if ( $login_error ) :
+		if ($login_error ) :
 		$allowed_html = array(
 			'a' => array(
 				'href' => array(),
@@ -33,13 +33,15 @@
 		);
 		?>
 			<div class="boosted-front-end-login-error" role="alert">
-				<?php echo wp_kses( $login_error, $allowed_html ); ?>
-				<?php delete_transient( 'login_error_' . $user_id ); ?>
+				<?php echo wp_kses($login_error, $allowed_html); ?>
+                <?php delete_transient('login_error_' . $form_id); ?>
 			</div>
 		<?php endif; ?>
-		<form class="boosted-front-end-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" name="Login-Form">
-			<?php wp_nonce_field( 'front_end_login_action', 'front_end_login_nonce' ); ?>
-			<input type="hidden" name="action" value="front_end_login">
+		<form class="boosted-front-end-form" method="post" action="<?php echo esc_url(add_query_arg('form_id', $form_id, admin_url('admin-post.php'))); ?>" name="Login-Form">
+
+			<input type="hidden" name="form_id" value="<?php echo esc_attr( $form_id ); ?>">
+        	<?php wp_nonce_field( 'front_end_login_action', 'front_end_login_nonce' ); ?>
+        	<input type="hidden" name="action" value="front_end_login">
 			<p class="boosted-front-end-username">
 				<?php if ( ! empty( $attributes['usernameLabel'] ) ) : ?><label for="username"><?php echo wp_kses_post( $attributes['usernameLabel'] ); ?></label><?php endif; ?>
 				<input class="boosted-front-end-username" type="text" id="username" name="username" required placeholder="<?php echo esc_attr( $attributes['usernamePlaceholder'] ); ?>">
