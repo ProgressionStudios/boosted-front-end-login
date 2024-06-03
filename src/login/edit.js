@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, RichText } from '@wordpress/block-editor';
-import { PanelBody, TextControl } from '@wordpress/components';
+import { PanelBody, TextControl, SelectControl, ToggleControl } from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
 import './editor.scss';
 
 let uniqueIdCounter = 0;
@@ -19,17 +20,45 @@ export default function Edit({ attributes, setAttributes }) {
 		loginButtonLabel,
 		registerLabel,
 		lostPasswordLabel,
-		uniqueId
+		uniqueId,
+		registerDisplay,
+		registerLink,
+		lostPasswordDisplay,
+		lostPasswordLink,
+		redirectURL
 	} = attributes;
 
 	if (!uniqueId) {
 		setAttributes({ uniqueId: generateUniqueId() });
 	}
 
+	const pages = useSelect(select => {
+		return select('core').getEntityRecords('postType', 'page', { per_page: -1 });
+	}, []);
+
+	const pageOptions = [
+		{ label: __('Referral Page', 'boosted-front-end-login'), value: 'referral_page' },
+		...(pages || []).map(page => ({
+			label: page.title.rendered,
+			value: page.link
+		}))
+	];
+
+	const defaultpageOptions = (pages || []).map(page => ({
+		label: page.title.rendered,
+		value: page.link
+	}));
+
 	return (
 		<>
 			<InspectorControls>
 				<PanelBody title={__('Login Form Settings', 'boosted-front-end-login')}>
+					<SelectControl
+						label={__('Redirect After Login', 'boosted-front-end-login')}
+						value={redirectURL || 'referral_page'}
+						options={pageOptions}
+						onChange={(value) => setAttributes({ redirectURL: value })}
+					/>
 					<TextControl
 						label={__('Username Label', 'boosted-front-end-login')}
 						value={usernameLabel}
@@ -60,16 +89,48 @@ export default function Edit({ attributes, setAttributes }) {
 						value={loginButtonLabel}
 						onChange={(value) => setAttributes({ loginButtonLabel: value })}
 					/>
+				</PanelBody>
+				<PanelBody title={__('Register & Lost Password Settings', 'boosted-front-end-login')}>
 					<TextControl
-						label={__('Register Label', 'boosted-front-end-login')}
+						label={__('Register Text', 'boosted-front-end-login')}
 						value={registerLabel}
 						onChange={(value) => setAttributes({ registerLabel: value })}
 					/>
+					<ToggleControl
+						label={__('Override Register Link', 'boosted-front-end-login')}
+						checked={registerDisplay}
+						onChange={(value) => setAttributes({ registerDisplay: value })}
+					/>
+					{registerDisplay && (
+						<>
+							<SelectControl
+								label={__('Register Link', 'boosted-front-end-login')}
+								value={registerLink}
+								options={defaultpageOptions}
+								onChange={(value) => setAttributes({ registerLink: value })}
+							/>
+						</>
+					)}
 					<TextControl
-						label={__('Lost Password Label', 'boosted-front-end-login')}
+						label={__('Lost Password Text', 'boosted-front-end-login')}
 						value={lostPasswordLabel}
 						onChange={(value) => setAttributes({ lostPasswordLabel: value })}
 					/>
+					<ToggleControl
+						label={__('Override Lost Password Link', 'boosted-front-end-login')}
+						checked={lostPasswordDisplay}
+						onChange={(value) => setAttributes({ lostPasswordDisplay: value })}
+					/>
+					{lostPasswordDisplay && (
+						<>
+							<SelectControl
+								label={__('Lost Password Link', 'boosted-front-end-login')}
+								value={lostPasswordLink}
+								options={defaultpageOptions}
+								onChange={(value) => setAttributes({ lostPasswordLink: value })}
+							/>
+						</>
+					)}
 				</PanelBody>
 			</InspectorControls>
 			<div {...useBlockProps()}>

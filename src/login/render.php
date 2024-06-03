@@ -38,10 +38,10 @@
 			</div>
 		<?php endif; ?>
 		<form class="boosted-front-end-form" method="post" action="<?php echo esc_url(add_query_arg('form_id', $form_id, admin_url('admin-post.php'))); ?>" name="Login-Form">
-
 			<input type="hidden" name="form_id" value="<?php echo esc_attr( $form_id ); ?>">
         	<?php wp_nonce_field( 'front_end_login_action', 'front_end_login_nonce' ); ?>
         	<input type="hidden" name="action" value="front_end_login">
+			<input type="hidden" name="redirectURL" value="<?php echo esc_attr($attributes['redirectURL'] ?? 'referral_page'); ?>">
 			<p class="boosted-front-end-username">
 				<?php if ( ! empty( $attributes['usernameLabel'] ) ) : ?><label for="username"><?php echo wp_kses_post( $attributes['usernameLabel'] ); ?></label><?php endif; ?>
 				<input class="boosted-front-end-username" type="text" id="username" name="username" required placeholder="<?php echo esc_attr( $attributes['usernamePlaceholder'] ); ?>">
@@ -62,11 +62,11 @@
 			</p>
 			<nav class="boosted-front-end-navigation">
 				<?php if ( get_option( 'users_can_register' ) && ! empty( $attributes['registerLabel'] ) ): ?>
-					<a class="boosted-front-end-navigation-register" href="<?php echo esc_url( wp_registration_url() ); ?>">
+					<a class="boosted-front-end-navigation-register" href="<?php echo esc_url(!empty($attributes['registerDisplay']) && !empty($attributes['registerLink']) ? $attributes['registerLink'] : wp_registration_url()); ?>">
 						<?php echo wp_kses_post( $attributes['registerLabel'] ); ?></a> <span> | </span>
 				<?php endif; ?>
 				<?php if ( ! empty( $attributes['lostPasswordLabel'] ) ) : ?>
-					<a class="boosted-front-end-navigation-lost" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php echo wp_kses_post( $attributes['lostPasswordLabel'] ); ?></a>
+					<a class="boosted-front-end-navigation-lost" href="<?php echo esc_url(!empty($attributes['lostPasswordDisplay']) && !empty($attributes['lostPasswordLink']) ? $attributes['lostPasswordLink'] : wp_lostpassword_url()); ?>"><?php echo wp_kses_post( $attributes['lostPasswordLabel'] ); ?></a>
 				<?php endif; ?>
 			</nav>
 		</form>

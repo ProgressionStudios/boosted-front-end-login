@@ -34,8 +34,8 @@ function front_end_login() {
             wp_set_auth_cookie($user->ID, $creds['remember']);
             do_action('wp_login', $user->user_login, $user);
 
-            $referrer = wp_get_referer() ? wp_get_referer() : home_url();
-            wp_redirect(esc_url_raw($referrer));
+            $redirect_url = !empty($_POST['redirectURL']) && $_POST['redirectURL'] !== 'referral_page' ? esc_url_raw($_POST['redirectURL']) : (wp_get_referer() ? wp_get_referer() : home_url());
+            wp_redirect(esc_url_raw($redirect_url));
             exit;
         }
     } else {

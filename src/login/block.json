@@ -45,6 +45,26 @@
 		"uniqueId": {
 			"type": "string",
 			"default": ""
+		},
+		"redirectURL": {
+			"type": "string",
+			"default": ""
+		},
+		"registerDisplay": {
+			"type": "boolean",
+			"default": false
+		},
+		"registerLink": {
+			"type": "string",
+			"default": ""
+		},
+		"lostPasswordDisplay": {
+			"type": "boolean",
+			"default": false
+		},
+		"lostPasswordLink": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"textdomain": "boosted-front-end-login",
