@@ -67,6 +67,16 @@
 			"default": ""
 		}
 	},
+	"example": {
+		"attributes": {
+			"usernameLabel": "Username or Email",
+			"passwordLabel": "Password",
+			"rememberMeLabel": "Remember Me",
+			"loginButtonLabel": "Log in",
+			"registerLabel": "Register",
+			"lostPasswordLabel": "Lost Password?"
+		}
+	},
 	"textdomain": "boosted-front-end-login",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
