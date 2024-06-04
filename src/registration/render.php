@@ -21,62 +21,68 @@
     $user_id = get_current_user_id();
     $registration_error = get_transient( 'registration_error_' . $user_id );
     $registration_message = get_transient( 'registration_message_' . $user_id );
+    $verification_message = get_transient( 'verification_message_' . $user_id );
+    $verification_error = get_transient( 'verification_error_' . $user_id );
 
-    if ( $registration_error ) :
-        $allowed_html = array(
-            'a' => array(
-                'href' => array(),
-                'title' => array()
-            ),
-            'br' => array(),
-            'em' => array(),
-            'strong' => array(),
-        );
-    ?>
+    $allowed_html = array(
+        'a' => array(
+            'href' => array(),
+            'title' => array()
+        ),
+        'br' => array(),
+        'em' => array(),
+        'strong' => array(),
+    );
+
+    if ( $registration_error ) : ?>
         <div class="boosted-front-end-registration-error" role="alert">
             <?php echo wp_kses( $registration_error, $allowed_html ); ?>
             <?php delete_transient( 'registration_error_' . $user_id ); ?>
         </div>
     <?php endif; ?>
 
-    <?php if ( $registration_message ) : 
-         $allowed_html = array(
-            'a' => array(
-                'href' => array(),
-                'title' => array()
-            ),
-            'br' => array(),
-            'em' => array(),
-            'strong' => array(),
-        );
-    ?>
+    <?php if ( $registration_message ) : ?>
         <div class="boosted-front-end-registration-success" role="alert">
             <?php echo wp_kses( $registration_message, $allowed_html ); ?>
             <?php delete_transient( 'registration_message_' . $user_id ); ?>
         </div>
     <?php endif; ?>
 
-    <form class="boosted-front-end-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="Registration-Form">
+    <?php if ( $verification_message ) : ?>
+        <div class="boosted-front-end-verification-success" role="alert">
+            <?php echo wp_kses( $verification_message, $allowed_html ); ?>
+            <?php delete_transient( 'verification_message_' . $user_id ); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ( $verification_error ) : ?>
+        <div class="boosted-front-end-verification-error" role="alert">
+            <?php echo wp_kses( $verification_error, $allowed_html ); ?>
+            <?php delete_transient( 'verification_error_' . $user_id ); ?>
+        </div>
+    <?php endif; ?>
+
+    <form class="boosted-front-end boosted-front-end-registration" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="Registration-Form">
         <?php wp_nonce_field( 'front_end_register_action', 'front_end_register_nonce' ); ?>
         <input type="hidden" name="action" value="front_end_register">
         <p class="boosted-front-end-username">
-            <label for="user_login"><?php esc_html_e( 'Username', 'boosted-front-end-login' ); ?></label>
-            <input class="boosted-front-end-username" type="text" id="user_login" name="user_login" required>
+            <?php if ( ! empty( $attributes['usernameLabel'] ) ) : ?><label for="user_login"><?php echo wp_kses_post( $attributes['usernameLabel'] ); ?></label><?php endif; ?>
+            <input class="boosted-front-end-username-field" type="text" id="user_login" name="user_login" required placeholder="<?php echo esc_attr( $attributes['usernamePlaceholder'] ); ?>">
         </p>
         <p class="boosted-front-end-email">
-            <label for="user_email"><?php esc_html_e( 'Email', 'boosted-front-end-login' ); ?></label>
-            <input class="boosted-front-end-email" type="email" id="user_email" name="user_email" required>
+            <?php if ( ! empty( $attributes['emailLabel'] ) ) : ?><label for="user_email"><?php echo wp_kses_post( $attributes['emailLabel'] ); ?></label><?php endif; ?>
+            <input class="boosted-front-end-email-field" type="email" id="user_email" name="user_email" required placeholder="<?php echo esc_attr( $attributes['emailPlaceholder'] ); ?>">
         </p>
         <p class="boosted-front-end-password">
-            <label for="user_pass"><?php esc_html_e( 'Password', 'boosted-front-end-login' ); ?></label>
-            <input class="boosted-front-end-password" type="password" id="user_pass" name="user_pass" required>
+            <?php if ( ! empty( $attributes['passwordLabel'] ) ) : ?><label for="user_pass"><?php echo wp_kses_post( $attributes['passwordLabel'] ); ?></label><?php endif; ?>
+            <input class="boosted-front-end-password-field" type="password" id="user_pass" name="user_pass" required placeholder="<?php echo esc_attr( $attributes['passwordPlaceholder'] ); ?>">
         </p>
         <p class="boosted-front-end-password-confirm">
-            <label for="user_pass_confirm"><?php esc_html_e( 'Confirm Password', 'boosted-front-end-login' ); ?></label>
-            <input class="boosted-front-end-password-confirm" type="password" id="user_pass_confirm" name="user_pass_confirm" required>
+            <?php if ( ! empty( $attributes['confirmPassword'] ) ) : ?><label for="user_pass_confirm"><?php echo wp_kses_post( $attributes['confirmPassword'] ); ?></label><?php endif; ?>
+            <input class="boosted-front-end-password-confirm-field" type="password" id="user_pass_confirm" name="user_pass_confirm" required placeholder="<?php echo esc_attr( $attributes['confirmPasswordPlaceholder'] ); ?>">
         </p>
         <p class="boosted-front-end-submit">
-            <input class="boosted-front-end-submit" type="submit" value="<?php esc_html_e( 'Register', 'boosted-front-end-login' ); ?>" aria-label="<?php esc_html_e( 'Register a new account', 'boosted-front-end-login' ); ?>">
+            <input class="boosted-front-end-submit-btn" type="submit" value="<?php echo wp_kses_post( $attributes['registerButtonLabel'] ); ?>" aria-label="<?php esc_html_e( 'Register a new account', 'boosted-front-end-login' ); ?>">
         </p>
     </form>
 <?php endif; ?>

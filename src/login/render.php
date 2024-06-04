@@ -37,28 +37,28 @@
                 <?php delete_transient('login_error_' . $form_id); ?>
 			</div>
 		<?php endif; ?>
-		<form class="boosted-front-end-form" method="post" action="<?php echo esc_url(add_query_arg('form_id', $form_id, admin_url('admin-post.php'))); ?>" name="Login-Form">
+		<form class="boosted-front-end boosted-front-end-login" method="post" action="<?php echo esc_url(add_query_arg('form_id', $form_id, admin_url('admin-post.php'))); ?>" name="Login-Form">
 			<input type="hidden" name="form_id" value="<?php echo esc_attr( $form_id ); ?>">
         	<?php wp_nonce_field( 'front_end_login_action', 'front_end_login_nonce' ); ?>
         	<input type="hidden" name="action" value="front_end_login">
 			<input type="hidden" name="redirectURL" value="<?php echo esc_attr($attributes['redirectURL'] ?? 'referral_page'); ?>">
 			<p class="boosted-front-end-username">
 				<?php if ( ! empty( $attributes['usernameLabel'] ) ) : ?><label for="username"><?php echo wp_kses_post( $attributes['usernameLabel'] ); ?></label><?php endif; ?>
-				<input class="boosted-front-end-username" type="text" id="username" name="username" required placeholder="<?php echo esc_attr( $attributes['usernamePlaceholder'] ); ?>">
+				<input class="boosted-front-end-username-field" type="text" id="username" name="username" required placeholder="<?php echo esc_attr( $attributes['usernamePlaceholder'] ); ?>">
 			</p>
-			<p class="boosted-front-end-username">
+			<p class="boosted-front-end-password">
 				<?php if ( ! empty( $attributes['passwordLabel'] ) ) : ?><label for="password"><?php echo wp_kses_post( $attributes['passwordLabel'] ); ?></label><?php endif; ?>
-				<input class="boosted-front-end-password" type="password" id="password" name="password" required placeholder="<?php echo esc_attr( $attributes['passwordPlaceholder'] ); ?>">
+				<input class="boosted-front-end-password-field" type="password" id="password" name="password" required placeholder="<?php echo esc_attr( $attributes['passwordPlaceholder'] ); ?>">
 			</p>
 			<?php if ( ! empty( $attributes['rememberMeLabel'] ) ) : ?>
 				<p class="boosted-front-end-remember">
-					<label class="boosted-front-end-remember">
+					<label class="boosted-front-end-remember-field">
 						<input name="remember" type="checkbox" id="rememberme" value="forever"> <?php echo wp_kses_post( $attributes['rememberMeLabel'] ); ?>
 					</label>
 				</p>
 			<?php endif; ?>
 			<p class="boosted-front-end-submit">
-				<input class="boosted-front-end-submit" type="submit" value="<?php echo esc_attr( $attributes['loginButtonLabel'] ); ?>" aria-label="<?php esc_html_e( 'Log in to your account', 'boosted-front-end-login' ); ?>">
+				<input class="boosted-front-end-submit-btn" type="submit" value="<?php echo esc_attr( $attributes['loginButtonLabel'] ); ?>" aria-label="<?php esc_html_e( 'Log in to your account', 'boosted-front-end-login' ); ?>">
 			</p>
 			<nav class="boosted-front-end-navigation">
 				<?php if ( get_option( 'users_can_register' ) && ! empty( $attributes['registerLabel'] ) ): ?>

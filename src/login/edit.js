@@ -134,7 +134,7 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 			</InspectorControls>
 			<div {...useBlockProps()}>
-				<form className="boosted-front-end-form" method="post" action="#">
+				<form className="boosted-front-end boosted-front-end-login" method="post" action="#">
 					<p className="boosted-front-end-username">
 						<RichText
 							tagName="label"
@@ -143,9 +143,9 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={(value) => setAttributes({ usernameLabel: value })}
 							placeholder={__('Username or Email', 'boosted-front-end-login')}
 						/>
-						<input className="boosted-front-end-username" type="text" id="username" name="username" required placeholder={usernamePlaceholder} />
+						<input className="boosted-front-end-username-field" type="text" id="username" name="username" required placeholder={usernamePlaceholder} />
 					</p>
-					<p className="boosted-front-end-username">
+					<p className="boosted-front-end-password">
 						<RichText
 							tagName="label"
 							htmlFor="password"
@@ -153,10 +153,10 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={(value) => setAttributes({ passwordLabel: value })}
 							placeholder={__('Password', 'boosted-front-end-login')}
 						/>
-						<input className="boosted-front-end-password" type="password" id="password" name="password" required placeholder={passwordPlaceholder} />
+						<input className="boosted-front-end-password-field" type="password" id="password" name="password" required placeholder={passwordPlaceholder} />
 					</p>
 					<p className="boosted-front-end-remember">
-						<label className="boosted-front-end-remember">
+						<label className="boosted-front-end-remember-field">
 							<input name="remember" type="checkbox" id="rememberme" value="forever" />
 							<RichText
 								tagName="span"
@@ -169,7 +169,7 @@ export default function Edit({ attributes, setAttributes }) {
 					<p className="boosted-front-end-submit">
 						<input
 							type="submit"
-							className="boosted-front-end-submit"
+							className="boosted-front-end-submit-btn"
 							value={loginButtonLabel}
 							aria-label={__('Log in to your account', 'boosted-front-end-login')}
 							disabled

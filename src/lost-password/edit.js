@@ -39,7 +39,7 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 			</InspectorControls>
 			<div {...useBlockProps()}>
-				<form className="boosted-front-end-form boosted-front-end-lost-password" method="post" action="#">
+				<form className="boosted-front-end boosted-front-end-lost-password" method="post" action="#">
 					<p className="boosted-front-end-form-lost-description">
 						<RichText
 							tagName="label"
@@ -57,12 +57,12 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={(value) => setAttributes({ usernameLabel: value })}
 							placeholder={__('Username or Email', 'boosted-front-end-login')}
 						/>
-						<input className="boosted-front-end-username" type="text" id="username" name="username" required placeholder={usernamePlaceholder} />
+						<input className="boosted-front-end-username-field" type="text" id="username" name="username" required placeholder={usernamePlaceholder} />
 					</p>
 					<p class="boosted-front-end-form-submit">
 						<input
 							type="submit"
-							className="boosted-front-end-submit"
+							className="boosted-front-end-submit-btn"
 							value={resetButtonLabel}
 							aria-label={__('Request a password reset', 'boosted-front-end-login')}
 							disabled

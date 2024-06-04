@@ -7,6 +7,44 @@
 	"category": "boosted-login",
 	"icon": "smiley",
 	"description": "User Registration form",
+	"attributes": {
+		"usernameLabel": {
+			"type": "string",
+			"default": "Username"
+		},
+		"usernamePlaceholder": {
+			"type": "string",
+			"default": ""
+		},
+		"emailLabel": {
+			"type": "string",
+			"default": "Email"
+		},
+		"emailPlaceholder": {
+			"type": "string",
+			"default": ""
+		},
+		"passwordLabel": {
+			"type": "string",
+			"default": "Password"
+		},
+		"passwordPlaceholder": {
+			"type": "string",
+			"default": ""
+		},
+		"confirmPassword": {
+			"type": "string",
+			"default": "Confirm Password"
+		},
+		"confirmPasswordPlaceholder": {
+			"type": "string",
+			"default": ""
+		},
+		"registerButtonLabel": {
+			"type": "string",
+			"default": "Register"
+		}
+	},
 	"example": {},
 	"supports": {
 		"html": false
@@ -15,6 +53,5 @@
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
-	"render": "file:./render.php",
-	"viewScript": "file:./view.js"
+	"render": "file:./render.php"
 }

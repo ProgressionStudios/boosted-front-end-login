@@ -38,7 +38,7 @@
         </div>
     <?php endif; ?>
 
-    <form class="boosted-front-end-form boosted-front-end-lost-password" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="Lost-Password-Form">
+    <form class="boosted-front-end boosted-front-end-lost-password" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="Lost-Password-Form">
         <?php wp_nonce_field( 'front_end_lost_password_action', 'front_end_lost_password_nonce' ); ?>
         <input type="hidden" name="action" value="front_end_lost_password">
         <?php if ( ! empty( $attributes['lostDescription'] ) ) : ?>
@@ -46,10 +46,10 @@
         <?php endif; ?>
         <p class="boosted-front-end-form-username">
             <?php if ( ! empty( $attributes['usernameLabel'] ) ) : ?><label for="user_login"><?php echo wp_kses_post( $attributes['usernameLabel'] ); ?></label><?php endif; ?>
-            <input class="boosted-front-end-username" type="text" id="user_login" name="user_login" placeholder="<?php echo esc_attr( $attributes['usernamePlaceholder'] ); ?>" required>
+            <input class="boosted-front-end-username-field" type="text" id="user_login" name="user_login" placeholder="<?php echo esc_attr( $attributes['usernamePlaceholder'] ); ?>" required>
         </p>
         <p class="boosted-front-end-form-submit">
-            <input class="boosted-front-end-submit" type="submit" value="<?php echo esc_attr( $attributes['resetButtonLabel'] ); ?>" aria-label="<?php esc_html_e('Request a password reset', 'boosted-front-end-login'); ?>">
+            <input class="boosted-front-end-submit-btn" type="submit" value="<?php echo esc_attr( $attributes['resetButtonLabel'] ); ?>" aria-label="<?php esc_html_e('Request a password reset', 'boosted-front-end-login'); ?>">
         </p>
     </form>
 </div>
