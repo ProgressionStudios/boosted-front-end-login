@@ -3,14 +3,24 @@ import { useBlockProps, InspectorControls, RichText } from '@wordpress/block-edi
 import { PanelBody, TextControl, TextareaControl } from '@wordpress/components';
 import './editor.scss';
 
+let uniqueIdCounter = 0;
+
+function generateUniqueId() {
+	return `boosted-lost-password-${++uniqueIdCounter}`;
+}
+
 export default function Edit({ attributes, setAttributes }) {
 	const {
 		lostDescription,
 		usernameLabel,
 		usernamePlaceholder,
 		resetButtonLabel,
+		uniqueId
 	} = attributes;
 
+	if (!uniqueId) {
+		setAttributes({ uniqueId: generateUniqueId() });
+	}
 
 	return (
 		<>

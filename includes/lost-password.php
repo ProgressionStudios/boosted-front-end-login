@@ -11,12 +11,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function front_end_lost_password() {
-    if (isset($_POST['user_login'])) {
+    if (isset($_POST['user_login']) && isset($_POST['form_id'])) {
         if ( ! isset( $_POST['front_end_lost_password_nonce'] ) || ! wp_verify_nonce( $_POST['front_end_lost_password_nonce'], 'front_end_lost_password_action' ) ) {
             wp_die( esc_html__( 'Nonce verification failed', 'boosted-front-end-login' ) );
         }
 
         $user_login = sanitize_text_field($_POST['user_login']);
+        $form_id = sanitize_text_field($_POST['form_id']);
         $user = get_user_by('login', $user_login);
         if (!$user && strpos($user_login, '@')) {
             $user = get_user_by('email', $user_login);
@@ -35,18 +36,18 @@ function front_end_lost_password() {
                 $message .= '<' . $reset_url . ">\r\n";
 
                 if (wp_mail($user->user_email, __('Password Reset Request', 'boosted-front-end-login'), $message)) {
-                    set_transient( 'lost_password_message_' . get_current_user_id(), __('Password reset email has been sent.', 'boosted-front-end-login'), 60 );
+                    set_transient( 'lost_password_message_' . $form_id, __('Password reset email has been sent.', 'boosted-front-end-login'), 60 );
                 } else {
-                    set_transient( 'lost_password_error_' . get_current_user_id(), __('Failed to send password reset email.', 'boosted-front-end-login'), 60 );
+                    set_transient( 'lost_password_error_' . $form_id, __('Failed to send password reset email.', 'boosted-front-end-login'), 60 );
                 }
             } else {
-                set_transient( 'lost_password_error_' . get_current_user_id(), $reset_key->get_error_message(), 60 );
+                set_transient( 'lost_password_error_' . $form_id, $reset_key->get_error_message(), 60 );
             }
         } else {
-            set_transient( 'lost_password_error_' . get_current_user_id(), __('Invalid username or email.', 'boosted-front-end-login'), 60 );
+            set_transient( 'lost_password_error_' . $form_id, $reset_key->get_error_message(), 60 );
         }
     }
-    wp_redirect( esc_url_raw( $_SERVER['HTTP_REFERER'] ) );
+    wp_redirect( add_query_arg('form_id', sanitize_text_field($_POST['form_id']), esc_url_raw($_SERVER['HTTP_REFERER'])) );
     exit;
 }
 add_action('admin_post_nopriv_front_end_lost_password', __NAMESPACE__ . '\\front_end_lost_password');

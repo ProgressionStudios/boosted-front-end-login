@@ -23,6 +23,10 @@
 		"resetButtonLabel": {
 			"type": "string",
 			"default": "Reset Password"
+		},
+		"uniqueId": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"example": {},

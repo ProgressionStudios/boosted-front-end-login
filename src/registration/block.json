@@ -43,6 +43,10 @@
 		"registerButtonLabel": {
 			"type": "string",
 			"default": "Register"
+		},
+		"uniqueId": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"example": {},

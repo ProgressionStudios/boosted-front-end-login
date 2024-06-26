@@ -3,6 +3,12 @@ import { useBlockProps, InspectorControls, RichText } from '@wordpress/block-edi
 import { PanelBody, TextControl, SelectControl, ToggleControl } from '@wordpress/components';
 import './editor.scss';
 
+let uniqueIdCounter = 0;
+
+function generateUniqueId() {
+	return `boosted-registration-${++uniqueIdCounter}`;
+}
+
 export default function Edit({ attributes, setAttributes }) {
 
 	const {
@@ -14,8 +20,13 @@ export default function Edit({ attributes, setAttributes }) {
 		passwordPlaceholder,
 		registerButtonLabel,
 		confirmPassword,
-		confirmPasswordPlaceholder
+		confirmPasswordPlaceholder,
+		uniqueId
 	} = attributes;
+
+	if (!uniqueId) {
+		setAttributes({ uniqueId: generateUniqueId() });
+	}
 
 	return (
 		<>

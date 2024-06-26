@@ -1,8 +1,8 @@
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
     <?php
-    $user_id = get_current_user_id();
-    $lost_password_error = get_transient( 'lost_password_error_' . $user_id );
-    $lost_password_message = get_transient( 'lost_password_message_' . $user_id );
+    $form_id = $attributes['uniqueId'];
+    $lost_password_error = get_transient('lost_password_error_' . $form_id);
+    $lost_password_message = get_transient('lost_password_message_' . $form_id);
 
     if ( $lost_password_error ) :
         $allowed_html = array(
@@ -17,7 +17,7 @@
     ?>
         <div class="boosted-front-end-login-error" role="alert">
             <?php echo wp_kses( $lost_password_error, $allowed_html ); ?>
-            <?php delete_transient( 'lost_password_error_' . $user_id ); ?>
+            <?php delete_transient( 'lost_password_error_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 
@@ -34,13 +34,14 @@
     ?>
         <div class="boosted-front-end-login-success" role="alert">
             <?php echo wp_kses( $lost_password_message, $allowed_html ); ?>
-            <?php delete_transient( 'lost_password_message_' . $user_id ); ?>
+            <?php delete_transient( 'lost_password_message_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 
-    <form class="boosted-front-end boosted-front-end-lost-password" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="Lost-Password-Form">
+    <form class="boosted-front-end boosted-front-end-lost-password" method="post" action="<?php echo esc_url(add_query_arg('t', time(), admin_url('admin-post.php'))); ?>" name="Lost-Password-Form">
         <?php wp_nonce_field( 'front_end_lost_password_action', 'front_end_lost_password_nonce' ); ?>
         <input type="hidden" name="action" value="front_end_lost_password">
+        <input type="hidden" name="form_id" value="<?php echo esc_attr( $form_id ); ?>">
         <?php if ( ! empty( $attributes['lostDescription'] ) ) : ?>
             <p class="boosted-front-end-form-lost-description"><?php echo wp_kses_post( $attributes['lostDescription'] ); ?></p>
         <?php endif; ?>
