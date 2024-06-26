@@ -24,10 +24,12 @@ function front_end_login() {
         );
 
         $user = wp_signon($creds, false);
+        $form_id = sanitize_text_field($_POST['form_id']);
+        $transient_id = 'login_error_' . $form_id;
 
         if (is_wp_error($user)) {
-            set_transient('login_error_' . sanitize_text_field($_POST['form_id']), $user->get_error_message(), 60);
-            wp_redirect(add_query_arg('form_id', sanitize_text_field($_POST['form_id']), esc_url_raw($_SERVER['HTTP_REFERER'])));
+            set_transient($transient_id, $user->get_error_message(), 60);
+            wp_redirect(add_query_arg(array('form_id' => $form_id, 't' => time()), esc_url_raw($_SERVER['HTTP_REFERER'])));
             exit;
         } else {
             wp_set_current_user($user->ID);

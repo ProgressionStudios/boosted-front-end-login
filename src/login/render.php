@@ -19,7 +19,8 @@
 	<?php else: ?>
 		<?php
     	$form_id = $attributes['uniqueId'];
-        $login_error = get_transient('login_error_' . $form_id);
+        $transient_id = 'login_error_' . $form_id;
+        $login_error = get_transient($transient_id);
 
 		if ($login_error ) :
 		$allowed_html = array(
@@ -34,10 +35,10 @@
 		?>
 			<div class="boosted-front-end-login-error" role="alert">
 				<?php echo wp_kses($login_error, $allowed_html); ?>
-                <?php delete_transient('login_error_' . $form_id); ?>
+				<?php delete_transient('login_error_' . $form_id); ?>
 			</div>
 		<?php endif; ?>
-		<form class="boosted-front-end boosted-front-end-login" method="post" action="<?php echo esc_url(add_query_arg('form_id', $form_id, admin_url('admin-post.php'))); ?>" name="Login-Form">
+        <form class="boosted-front-end boosted-front-end-login" method="post" action="<?php echo esc_url(add_query_arg(array('form_id' => $form_id, 't' => time()), admin_url('admin-post.php'))); ?>" name="Login-Form">
 			<input type="hidden" name="form_id" value="<?php echo esc_attr( $form_id ); ?>">
         	<?php wp_nonce_field( 'front_end_login_action', 'front_end_login_nonce' ); ?>
         	<input type="hidden" name="action" value="front_end_login">
