@@ -27,8 +27,10 @@
     
     $registration_error = get_transient( 'registration_error_' . $form_id );
     $registration_message = get_transient( 'registration_message_' . $form_id );
-    $verification_message = get_transient( 'verification_message_' . $form_id );
-    $verification_error = get_transient( 'verification_error_' . $form_id );
+    
+    $verified = isset($_GET['verified']) ? sanitize_text_field($_GET['verified']) : '';
+    $verification_message = ($verified === '1') ? __( 'Your email has been verified. You can now log in.', 'boosted-front-end-login' ) : '';
+    $verification_error = ($verified === '0') ? __( 'Invalid verification key.', 'boosted-front-end-login' ) : '';
 
     $allowed_html = array(
         'a' => array(
@@ -57,14 +59,12 @@
     <?php if ( $verification_message ) : ?>
         <div class="boosted-front-end-verification-success" role="alert">
             <?php echo wp_kses( $verification_message, $allowed_html ); ?>
-            <?php delete_transient( 'verification_message_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 
     <?php if ( $verification_error ) : ?>
         <div class="boosted-front-end-verification-error" role="alert">
             <?php echo wp_kses( $verification_error, $allowed_html ); ?>
-            <?php delete_transient( 'verification_error_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 

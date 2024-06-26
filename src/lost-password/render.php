@@ -38,7 +38,7 @@
         </div>
     <?php endif; ?>
 
-    <form class="boosted-front-end boosted-front-end-lost-password" method="post" action="<?php echo esc_url(add_query_arg('t', time(), admin_url('admin-post.php'))); ?>" name="Lost-Password-Form">
+    <form class="boosted-front-end boosted-front-end-lost-password" method="post" action="<?php echo esc_url(add_query_arg(array('t' => time()), admin_url('admin-post.php'))); ?>" name="Lost-Password-Form">
         <?php wp_nonce_field( 'front_end_lost_password_action', 'front_end_lost_password_nonce' ); ?>
         <input type="hidden" name="action" value="front_end_lost_password">
         <input type="hidden" name="form_id" value="<?php echo esc_attr( $form_id ); ?>">

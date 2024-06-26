@@ -42,6 +42,13 @@ function block_categories( $block_categories, $editor_context ) {
 }
 add_filter( 'block_categories_all', __NAMESPACE__ . '\\block_categories', 10, 2 );
 
+function add_pending_role() {
+    if ( ! get_role( 'pending' ) ) {
+        add_role( 'pending', __( 'Pending', 'boosted-front-end-login' ), array( 'read' => true ) );
+    }
+}
+register_activation_hook( __FILE__, __NAMESPACE__ . '\\add_pending_role' );
+
 require_once plugin_dir_path(__FILE__) . 'includes/page-activation.php';
 register_activation_hook( __FILE__, __NAMESPACE__ . '\\create_login_pages' );
 add_filter('lostpassword_url', __NAMESPACE__ . '\\lostpassword_page_link');

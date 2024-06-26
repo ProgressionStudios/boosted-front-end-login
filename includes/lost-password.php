@@ -44,10 +44,10 @@ function front_end_lost_password() {
                 set_transient( 'lost_password_error_' . $form_id, $reset_key->get_error_message(), 60 );
             }
         } else {
-            set_transient( 'lost_password_error_' . $form_id, $reset_key->get_error_message(), 60 );
+            set_transient( 'lost_password_error_' . $form_id, __('Invalid username or email.', 'boosted-front-end-login'), 60 );
         }
     }
-    wp_redirect( add_query_arg('form_id', sanitize_text_field($_POST['form_id']), esc_url_raw($_SERVER['HTTP_REFERER'])) );
+    wp_redirect( add_query_arg(array('form_id' => sanitize_text_field($_POST['form_id']), 't' => time()), esc_url_raw($_SERVER['HTTP_REFERER'])) );
     exit;
 }
 add_action('admin_post_nopriv_front_end_lost_password', __NAMESPACE__ . '\\front_end_lost_password');

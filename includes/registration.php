@@ -45,6 +45,8 @@ function front_end_register() {
         } else {
             $verification_key = wp_generate_password( 20, false );
             update_user_meta( $user_id, 'email_verification_key', $verification_key );
+            $registration_page_id = get_option( 'boosted_registration_page_id' );
+            $registration_url = $registration_page_id ? get_permalink( $registration_page_id ) : home_url();
 
             $verification_url = add_query_arg(
                 array(
@@ -53,7 +55,7 @@ function front_end_register() {
                     'user'   => $user_id,
                     '_wpnonce' => wp_create_nonce('verify_email_' . $user_id),
                 ),
-                home_url()
+                $registration_url
             );
 
             // Translators: %s is the verification URL that the user needs to click to verify their email.
@@ -77,21 +79,35 @@ function verify_email() {
 
         $verification_key = sanitize_text_field( $_GET['key'] );
         $user_id = intval( $_GET['user'] );
-
         $stored_key = get_user_meta( $user_id, 'email_verification_key', true );
+        $registration_page_id = get_option( 'boosted_registration_page_id' );
+        $registration_url = $registration_page_id ? get_permalink( $registration_page_id ) : home_url();
 
         if ( $stored_key === $verification_key ) {
             delete_user_meta( $user_id, 'email_verification_key' );
             wp_update_user( array( 'ID' => $user_id, 'role' => 'subscriber' ) );
 
             set_transient( 'verification_message_' . $user_id, __( 'Your email has been verified. You can now log in.', 'boosted-front-end-login' ), 60 );
-            wp_redirect( home_url() );
+            wp_redirect( add_query_arg( 'verified', 1, $registration_url ) );
             exit;
         } else {
             set_transient( 'verification_error_' . $user_id, __( 'Invalid verification key.', 'boosted-front-end-login' ), 60 );
-            wp_redirect( home_url() );
+            wp_redirect( add_query_arg( 'verified', 0, $registration_url ) );
             exit;
         }
     }
 }
 add_action( 'init', __NAMESPACE__ . '\\verify_email' );
+
+function prevent_pending_role_login( $user ) {
+    if ( is_wp_error( $user ) ) {
+        return $user;
+    }
+
+    if ( in_array( 'pending', (array) $user->roles ) ) {
+        return new \WP_Error( 'pending_role', __( 'Your account is still pending approval.', 'boosted-front-end-login' ) );
+    }
+
+    return $user;
+}
+add_filter( 'wp_authenticate_user', __NAMESPACE__ . '\\prevent_pending_role_login', 10, 1 );
