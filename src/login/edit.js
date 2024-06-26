@@ -11,7 +11,6 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import './editor.scss';
 
 let uniqueIdCounter = 0;
 

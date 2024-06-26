@@ -5,7 +5,6 @@ import {
 	RichText,
 } from '@wordpress/block-editor';
 import { PanelBody, TextControl, TextareaControl } from '@wordpress/components';
-import './editor.scss';
 
 let uniqueIdCounter = 0;
 
