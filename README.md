@@ -6,7 +6,7 @@ Create Login, Registration, & Lost Password pages using the Block Editor.
 
 ## Custom Blocks
 - Login form
-- Lost Password?
+- Lost Password
 - User Registration
 
 ## Features

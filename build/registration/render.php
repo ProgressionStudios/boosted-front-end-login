@@ -5,22 +5,22 @@
     </p>
 <?php else: ?>
 <?php if (is_user_logged_in()): ?>
-	<p class="boosted-front-end-already-logged-in">
-		<?php 
-		$current_user = wp_get_current_user();
+    <p class="boosted-front-end-already-logged-in">
+        <?php 
+        $current_user = wp_get_current_user();
         $username = $current_user->user_login;
         $logout_url = wp_logout_url( home_url() );
-		printf(
-			wp_kses_post(
-				/* translators: 1: username, 2: username, 3: logout URL */
-				__('Hello <span>%1$s</span> (not <span>%2$s</span>? <a href="%3$s">Log out</a>)', 'boosted-front-end-login')
-			),
-			esc_html( $username ),
-			esc_html( $username ),
-			esc_url( $logout_url )
-		);
-	?>
-	</p>
+        printf(
+            wp_kses_post(
+                /* translators: 1: username, 2: username, 3: logout URL */
+                __('Hello <span>%1$s</span> (not <span>%2$s</span>? <a href="%3$s">Log out</a>)', 'boosted-front-end-login')
+            ),
+            esc_html( $username ),
+            esc_html( $username ),
+            esc_url( $logout_url )
+        );
+    ?>
+    </p>
 <?php else: ?>
     <?php
     $form_id = $attributes['uniqueId'];

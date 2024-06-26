@@ -17,28 +17,28 @@
 namespace BoostedLogin;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+    exit;
 }
 
 function custom_block_init() {
-	register_block_type( __DIR__ . '/build/login' );
+    register_block_type( __DIR__ . '/build/login' );
     register_block_type( __DIR__ . '/build/lost-password' );
-	register_block_type( __DIR__ . '/build/registration' );
+    register_block_type( __DIR__ . '/build/registration' );
 }
 add_action( 'init', __NAMESPACE__ . '\\custom_block_init' );
 
 function block_categories( $block_categories, $editor_context ) {
-	if ( ! empty( $editor_context->post ) ) {
-		array_push(
-			$block_categories,
-			array(
-				'slug'  => 'boosted-login',
-				'title' => __( 'Boosted Front-end Login', 'boosted-front-end-login' ),
-				'icon'  => null,
-			)
-		);
-	}
-	return $block_categories;
+    if ( ! empty( $editor_context->post ) ) {
+        array_push(
+            $block_categories,
+            array(
+                'slug'  => 'boosted-login',
+                'title' => __( 'Boosted Front-end Login', 'boosted-front-end-login' ),
+                'icon'  => null,
+            )
+        );
+    }
+    return $block_categories;
 }
 add_filter( 'block_categories_all', __NAMESPACE__ . '\\block_categories', 10, 2 );
 
