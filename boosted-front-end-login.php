@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Boosted Front-end Login
- * Description:       Add a Front-end Login, Registration, & Password Reset blocks
+ * Description:       Add Front-end Login, Registration, & Lost Password blocks
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Version:           0.1.0

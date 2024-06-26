@@ -6,34 +6,19 @@ Stable tag:        0.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Example block scaffolded with Create Block tool.
+Boosted Front-end Login
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+Create Login, Registration, & Lost Password pages using the Block Editor.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+View Demo: https://boosted-login.progressionstudios.com/
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload the plugin files to the `/wp-content/plugins/boosted-front-end-login` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-
-
-== Frequently Asked Questions ==
-
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
+1. Install and acivate the "Boosted Front-end Login" plugin.
+2. Click to "Add Block" within the block editor to add a new block. 
+3. You will find these 3 custom blocks: Login, Lost Password, and User Registration
 
 == Screenshots ==
 
@@ -47,9 +32,3 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 = 0.1.0 =
 * Release
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
