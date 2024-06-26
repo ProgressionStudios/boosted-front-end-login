@@ -1,4 +1,9 @@
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
+<?php if ( ! get_option('users_can_register') ) : ?>
+    <p class="boosted-front-end-registration-closed">
+        <?php esc_html_e( 'Registration is currently closed.', 'boosted-front-end-login' ); ?>
+    </p>
+<?php else: ?>
 <?php if (is_user_logged_in()): ?>
 	<p class="boosted-front-end-already-logged-in">
 		<?php 
@@ -18,11 +23,12 @@
 	</p>
 <?php else: ?>
     <?php
-    $user_id = get_current_user_id();
-    $registration_error = get_transient( 'registration_error_' . $user_id );
-    $registration_message = get_transient( 'registration_message_' . $user_id );
-    $verification_message = get_transient( 'verification_message_' . $user_id );
-    $verification_error = get_transient( 'verification_error_' . $user_id );
+    $form_id = $attributes['uniqueId'];
+    
+    $registration_error = get_transient( 'registration_error_' . $form_id );
+    $registration_message = get_transient( 'registration_message_' . $form_id );
+    $verification_message = get_transient( 'verification_message_' . $form_id );
+    $verification_error = get_transient( 'verification_error_' . $form_id );
 
     $allowed_html = array(
         'a' => array(
@@ -37,34 +43,35 @@
     if ( $registration_error ) : ?>
         <div class="boosted-front-end-registration-error" role="alert">
             <?php echo wp_kses( $registration_error, $allowed_html ); ?>
-            <?php delete_transient( 'registration_error_' . $user_id ); ?>
+            <?php delete_transient( 'registration_error_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 
     <?php if ( $registration_message ) : ?>
         <div class="boosted-front-end-registration-success" role="alert">
             <?php echo wp_kses( $registration_message, $allowed_html ); ?>
-            <?php delete_transient( 'registration_message_' . $user_id ); ?>
+            <?php delete_transient( 'registration_message_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 
     <?php if ( $verification_message ) : ?>
         <div class="boosted-front-end-verification-success" role="alert">
             <?php echo wp_kses( $verification_message, $allowed_html ); ?>
-            <?php delete_transient( 'verification_message_' . $user_id ); ?>
+            <?php delete_transient( 'verification_message_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 
     <?php if ( $verification_error ) : ?>
         <div class="boosted-front-end-verification-error" role="alert">
             <?php echo wp_kses( $verification_error, $allowed_html ); ?>
-            <?php delete_transient( 'verification_error_' . $user_id ); ?>
+            <?php delete_transient( 'verification_error_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 
-    <form class="boosted-front-end boosted-front-end-registration" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="Registration-Form">
+    <form class="boosted-front-end boosted-front-end-registration" method="post" action="<?php echo esc_url(add_query_arg('t', time(), admin_url('admin-post.php'))); ?>" name="Registration-Form">
         <?php wp_nonce_field( 'front_end_register_action', 'front_end_register_nonce' ); ?>
         <input type="hidden" name="action" value="front_end_register">
+        <input type="hidden" name="form_id" value="<?php echo esc_attr( $form_id ); ?>">
         <p class="boosted-front-end-username">
             <?php if ( ! empty( $attributes['usernameLabel'] ) ) : ?><label for="user_login"><?php echo wp_kses_post( $attributes['usernameLabel'] ); ?></label><?php endif; ?>
             <input class="boosted-front-end-username-field" type="text" id="user_login" name="user_login" required placeholder="<?php echo esc_attr( $attributes['usernamePlaceholder'] ); ?>">
@@ -85,5 +92,6 @@
             <input class="boosted-front-end-submit-btn" type="submit" value="<?php echo wp_kses_post( $attributes['registerButtonLabel'] ); ?>" aria-label="<?php esc_html_e( 'Register a new account', 'boosted-front-end-login' ); ?>">
         </p>
     </form>
+<?php endif; ?>
 <?php endif; ?>
 </div>
