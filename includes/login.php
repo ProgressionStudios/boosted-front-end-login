@@ -13,8 +13,6 @@ if (!defined('ABSPATH')) {
 function front_end_login() {
     if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['form_id'])) {
 
-        do_action('boosted_front_end_login_pre_auth', $_POST);
-
         if (!isset($_POST['front_end_login_nonce']) || !wp_verify_nonce($_POST['front_end_login_nonce'], 'front_end_login_action')) {
             wp_die(esc_html__('Nonce verification failed', 'boosted-front-end-login'));
         }

@@ -75,8 +75,6 @@ add_action('admin_post_front_end_register', __NAMESPACE__ . '\\front_end_registe
 function verify_email() {
     if ( isset( $_GET['key'] ) && isset( $_GET['user'] ) && isset( $_GET['_wpnonce'] ) ) {
         
-        do_action('boosted_front_end_register_pre_validation', $_POST);
-
         if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'verify_email_' . intval( $_GET['user'] ) ) ) {
             wp_die( esc_html__( 'Nonce verification failed', 'boosted-front-end-login' ) );
         }

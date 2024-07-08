@@ -27,8 +27,10 @@
     
     $registration_error = get_transient( 'registration_error_' . $form_id );
     $registration_message = get_transient( 'registration_message_' . $form_id );
-    
-    $verified = isset($_GET['verified']) ? sanitize_text_field($_GET['verified']) : '';
+    $verified = '';
+    if (isset($_GET['verified']) && isset($_GET['_wpnonce']) && wp_verify_nonce($_GET['_wpnonce'], 'verify_email_' . intval($_GET['user']))) {
+        $verified = sanitize_text_field($_GET['verified']);
+    }$verified = isset($_GET['verified']) ? sanitize_text_field($_GET['verified']) : '';
     $verification_message = ($verified === '1') ? __( 'Your email has been verified. You can now log in.', 'boosted-front-end-login' ) : '';
     $verification_error = ($verified === '0') ? __( 'Invalid verification key.', 'boosted-front-end-login' ) : '';
 
