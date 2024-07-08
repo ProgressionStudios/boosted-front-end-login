@@ -1,4 +1,4 @@
-=== Login ===
+=== Boosted Front-end Login ===
 Contributors:      ProgressionStudios
 Tags:              block, forms, login, registration
 Requires at least: 6.0
