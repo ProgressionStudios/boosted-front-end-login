@@ -12,6 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function front_end_lost_password() {
     if (isset($_POST['user_login']) && isset($_POST['form_id'])) {
+
+        do_action('boosted_front_end_lost_password_pre_request', $_POST);
+        
         if ( ! isset( $_POST['front_end_lost_password_nonce'] ) || ! wp_verify_nonce( $_POST['front_end_lost_password_nonce'], 'front_end_lost_password_action' ) ) {
             wp_die( esc_html__( 'Nonce verification failed', 'boosted-front-end-login' ) );
         }
@@ -37,8 +40,10 @@ function front_end_lost_password() {
 
                 if (wp_mail($user->user_email, __('Password Reset Request', 'boosted-front-end-login'), $message)) {
                     set_transient( 'lost_password_message_' . $form_id, __('Password reset email has been sent.', 'boosted-front-end-login'), 60 );
+                    do_action('boosted_front_end_lost_password_email_sent', $user, $reset_url);
                 } else {
                     set_transient( 'lost_password_error_' . $form_id, __('Failed to send password reset email.', 'boosted-front-end-login'), 60 );
+                    do_action('boosted_front_end_lost_password_email_failed', $user);
                 }
             } else {
                 set_transient( 'lost_password_error_' . $form_id, $reset_key->get_error_message(), 60 );

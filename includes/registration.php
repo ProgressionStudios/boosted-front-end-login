@@ -63,6 +63,7 @@ function front_end_register() {
             wp_mail( $user_email, __( 'Email Verification', 'boosted-front-end-login' ), $message );
 
             set_transient( 'registration_message_' . $form_id, __('Registration complete. Please check your email to verify your account.', 'boosted-front-end-login'), 60 );
+            do_action('boosted_front_end_register_success', $user_id, $userdata, $verification_url);
             wp_redirect( add_query_arg(array('form_id' => $form_id, 't' => time()), esc_url_raw( $_SERVER['HTTP_REFERER'] )) );
             exit;
         }
@@ -73,6 +74,9 @@ add_action('admin_post_front_end_register', __NAMESPACE__ . '\\front_end_registe
 
 function verify_email() {
     if ( isset( $_GET['key'] ) && isset( $_GET['user'] ) && isset( $_GET['_wpnonce'] ) ) {
+        
+        do_action('boosted_front_end_register_pre_validation', $_POST);
+
         if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'verify_email_' . intval( $_GET['user'] ) ) ) {
             wp_die( esc_html__( 'Nonce verification failed', 'boosted-front-end-login' ) );
         }
@@ -88,10 +92,12 @@ function verify_email() {
             wp_update_user( array( 'ID' => $user_id, 'role' => 'subscriber' ) );
 
             set_transient( 'verification_message_' . $user_id, __( 'Your email has been verified. You can now log in.', 'boosted-front-end-login' ), 60 );
+            do_action('boosted_front_end_email_verified', $user_id);
             wp_redirect( add_query_arg( 'verified', 1, $registration_url ) );
             exit;
         } else {
             set_transient( 'verification_error_' . $user_id, __( 'Invalid verification key.', 'boosted-front-end-login' ), 60 );
+            do_action('boosted_front_end_email_verification_failed', $user_id);
             wp_redirect( add_query_arg( 'verified', 0, $registration_url ) );
             exit;
         }

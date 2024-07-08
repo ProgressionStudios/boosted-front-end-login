@@ -16,7 +16,7 @@
         );
     ?>
         <div class="boosted-front-end-login-error" role="alert">
-            <?php echo wp_kses( $lost_password_error, $allowed_html ); ?>
+            <?php echo wp_kses(apply_filters('boosted_lost_password_error_message', $lost_password_error), $allowed_html); ?>
             <?php delete_transient( 'lost_password_error_' . $form_id ); ?>
         </div>
     <?php endif; ?>
@@ -33,7 +33,7 @@
         );
     ?>
         <div class="boosted-front-end-login-success" role="alert">
-            <?php echo wp_kses( $lost_password_message, $allowed_html ); ?>
+            <?php echo wp_kses(apply_filters('boosted_lost_password_success_message', $lost_password_message), $allowed_html); ?>
             <?php delete_transient( 'lost_password_message_' . $form_id ); ?>
         </div>
     <?php endif; ?>
@@ -42,6 +42,7 @@
         <?php wp_nonce_field( 'front_end_lost_password_action', 'front_end_lost_password_nonce' ); ?>
         <input type="hidden" name="action" value="front_end_lost_password">
         <input type="hidden" name="form_id" value="<?php echo esc_attr( $form_id ); ?>">
+        <?php do_action('boosted_front_end_lost_password_form_before_fields'); ?>
         <?php if ( ! empty( $attributes['lostDescription'] ) ) : ?>
             <p class="boosted-front-end-form-lost-description"><?php echo wp_kses_post( $attributes['lostDescription'] ); ?></p>
         <?php endif; ?>

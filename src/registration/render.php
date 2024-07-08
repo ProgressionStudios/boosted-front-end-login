@@ -44,14 +44,14 @@
 
     if ( $registration_error ) : ?>
         <div class="boosted-front-end-registration-error" role="alert">
-            <?php echo wp_kses( $registration_error, $allowed_html ); ?>
+            <?php echo wp_kses(apply_filters('boosted_registration_error_message', $registration_error), $allowed_html); ?>
             <?php delete_transient( 'registration_error_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 
     <?php if ( $registration_message ) : ?>
         <div class="boosted-front-end-registration-success" role="alert">
-            <?php echo wp_kses( $registration_message, $allowed_html ); ?>
+            <?php echo wp_kses(apply_filters('boosted_registration_success_message', $registration_message), $allowed_html); ?>
             <?php delete_transient( 'registration_message_' . $form_id ); ?>
         </div>
     <?php endif; ?>
@@ -72,6 +72,7 @@
         <?php wp_nonce_field( 'front_end_register_action', 'front_end_register_nonce' ); ?>
         <input type="hidden" name="action" value="front_end_register">
         <input type="hidden" name="form_id" value="<?php echo esc_attr( $form_id ); ?>">
+        <?php do_action('boosted_front_end_register_form_before_fields'); ?>
         <p class="boosted-front-end-username">
             <?php if ( ! empty( $attributes['usernameLabel'] ) ) : ?><label for="user_login"><?php echo wp_kses_post( $attributes['usernameLabel'] ); ?></label><?php endif; ?>
             <input class="boosted-front-end-username-field" type="text" id="user_login" name="user_login" required placeholder="<?php echo esc_attr( $attributes['usernamePlaceholder'] ); ?>">

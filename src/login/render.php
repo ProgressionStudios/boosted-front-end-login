@@ -34,7 +34,7 @@
         );
         ?>
             <div class="boosted-front-end-login-error" role="alert">
-                <?php echo wp_kses($login_error, $allowed_html); ?>
+                <?php echo wp_kses(apply_filters('boosted_login_error_message', $login_error), $allowed_html); ?>
                 <?php delete_transient('login_error_' . $form_id); ?>
             </div>
         <?php endif; ?>
@@ -43,6 +43,7 @@
             <?php wp_nonce_field( 'front_end_login_action', 'front_end_login_nonce' ); ?>
             <input type="hidden" name="action" value="front_end_login">
             <input type="hidden" name="redirectURL" value="<?php echo esc_attr($attributes['redirectURL'] ?? 'referral_page'); ?>">
+            <?php do_action('boosted_front_end_login_form_before_fields'); ?>
             <p class="boosted-front-end-username">
                 <?php if ( ! empty( $attributes['usernameLabel'] ) ) : ?><label for="username"><?php echo wp_kses_post( $attributes['usernameLabel'] ); ?></label><?php endif; ?>
                 <input class="boosted-front-end-username-field" type="text" id="username" name="username" required placeholder="<?php echo esc_attr( $attributes['usernamePlaceholder'] ); ?>">
