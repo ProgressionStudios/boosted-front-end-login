@@ -18,7 +18,7 @@ function front_end_login() {
         }
 
         $creds = array(
-            'user_login' => sanitize_text_field($_POST['username']),
+            'user_login' => sanitize_user($_POST['username']),
             'user_password' => sanitize_text_field($_POST['password']),
             'remember' => isset($_POST['remember']) && $_POST['remember'] === 'forever'
         );

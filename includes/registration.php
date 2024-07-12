@@ -17,10 +17,10 @@ function front_end_register() {
             wp_die( esc_html__( 'Nonce verification failed', 'boosted-front-end-login' ) );
         }
 
-        $user_login = sanitize_text_field( $_POST['user_login'] );
+        $user_login = sanitize_user( $_POST['user_login'] );
         $user_email = sanitize_email( $_POST['user_email'] );
-        $user_pass = $_POST['user_pass'];
-        $user_pass_confirm = $_POST['user_pass_confirm'];
+        $user_pass = sanitize_text_field($_POST['user_pass']);
+        $user_pass_confirm = sanitize_text_field($_POST['user_pass_confirm']);
         $form_id = sanitize_text_field($_POST['form_id']);
 
         if ( $user_pass !== $user_pass_confirm ) {

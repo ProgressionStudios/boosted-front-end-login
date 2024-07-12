@@ -17,7 +17,7 @@ function front_end_lost_password() {
             wp_die( esc_html__( 'Nonce verification failed', 'boosted-front-end-login' ) );
         }
 
-        $user_login = sanitize_text_field($_POST['user_login']);
+        $user_login = sanitize_user($_POST['user_login']);
         $form_id = sanitize_text_field($_POST['form_id']);
         $user = get_user_by('login', $user_login);
         if (!$user && strpos($user_login, '@')) {
