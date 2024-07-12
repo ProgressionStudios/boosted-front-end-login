@@ -14,7 +14,7 @@
  * @package Boosted
  */
 
-namespace BoostedLogin;
+namespace BoostedFrontEndLogin;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -32,7 +32,7 @@ function block_categories( $block_categories, $editor_context ) {
         array_push(
             $block_categories,
             array(
-                'slug'  => 'boosted-login',
+                'slug'  => 'boosted-front-end-login',
                 'title' => __( 'Boosted Front-end Login', 'boosted-front-end-login' ),
                 'icon'  => null,
             )

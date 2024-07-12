@@ -4,7 +4,7 @@
     "name": "boosted/boosted-lost-password",
     "version": "0.1.0",
     "title": "Lost Password",
-    "category": "boosted-login",
+    "category": "boosted-front-end-login",
     "icon": "smiley",
     "description": "Lost password form",
     "attributes": {

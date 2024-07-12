@@ -4,7 +4,7 @@
   "name": "boosted/boosted-registration",
   "version": "0.1.0",
   "title": "User Registration",
-  "category": "boosted-login",
+  "category": "boosted-front-end-login",
   "icon": "smiley",
   "description": "User Registration form",
   "attributes": {

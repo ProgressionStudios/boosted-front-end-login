@@ -4,7 +4,7 @@
     "name": "boosted/boosted-front-end-login",
     "version": "0.1.0",
     "title": "Login",
-    "category": "boosted-login",
+    "category": "boosted-front-end-login",
     "description": "Front-end login form",
     "supports": {
         "html": false

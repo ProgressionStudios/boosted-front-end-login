@@ -4,7 +4,7 @@
  * @package Boosted
  */
 
-namespace BoostedLogin;
+namespace BoostedFrontEndLogin;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;

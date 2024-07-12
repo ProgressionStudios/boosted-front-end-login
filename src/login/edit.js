@@ -15,7 +15,7 @@ import { useSelect } from '@wordpress/data';
 let uniqueIdCounter = 0;
 
 function generateUniqueId() {
-    return `boosted-login-${ ++uniqueIdCounter }`;
+    return `boosted-front-end-login-${ ++uniqueIdCounter }`;
 }
 
 export default function Edit( { attributes, setAttributes } ) {
