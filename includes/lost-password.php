@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function front_end_lost_password() {
     if (isset($_POST['user_login']) && isset($_POST['form_id'])) {
         
-        if ( ! isset( $_POST['front_end_lost_password_nonce'] ) || ! wp_verify_nonce( $_POST['front_end_lost_password_nonce'], 'front_end_lost_password_action' ) ) {
+        if (!isset($_POST['front_end_lost_password_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['front_end_lost_password_nonce'])), 'front_end_lost_password_action')) {
             wp_die( esc_html__( 'Nonce verification failed', 'boosted-front-end-login' ) );
         }
 

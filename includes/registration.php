@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function front_end_register() {
     if (isset($_POST['user_login']) && isset($_POST['user_email']) && isset($_POST['user_pass']) && isset($_POST['user_pass_confirm']) && isset($_POST['form_id'])) {
 
-        if ( ! isset( $_POST['front_end_register_nonce'] ) || ! wp_verify_nonce( $_POST['front_end_register_nonce'], 'front_end_register_action' ) ) {
+        if (!isset($_POST['front_end_register_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['front_end_register_nonce'])), 'front_end_register_action')) {
             wp_die( esc_html__( 'Nonce verification failed', 'boosted-front-end-login' ) );
         }
 
@@ -75,7 +75,7 @@ add_action('admin_post_front_end_register', __NAMESPACE__ . '\\front_end_registe
 function verify_email() {
     if ( isset( $_GET['key'] ) && isset( $_GET['user'] ) && isset( $_GET['_wpnonce'] ) ) {
         
-        if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'verify_email_' . intval( $_GET['user'] ) ) ) {
+        if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'verify_email_' . intval($_GET['user']))) {
             wp_die( esc_html__( 'Nonce verification failed', 'boosted-front-end-login' ) );
         }
 
