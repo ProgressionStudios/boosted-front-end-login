@@ -1,3 +1,6 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
     <?php if (is_user_logged_in()): ?>
         <p class="boosted-front-end-already-logged-in">
