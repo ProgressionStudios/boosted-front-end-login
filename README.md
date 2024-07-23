@@ -22,6 +22,6 @@ Create Login, Registration, & Lost Password pages using the Block Editor.
 ## Directions
 1. Install and acivate the **Boosted Front-end Login** plugin.
 2. Click to **Add Block** within the block editor to add a new block. 
-3. You will find these 3 custom blocks: **Login, Lost Password, and User Registration**
+3. YYou will find the **Login, Lost Password, and User Registration** blocks under the heading "Boosted Front-End Login"
 
 <img src="https://boosted-login.progressionstudios.com/wp-content/uploads/2024/06/blocks-cropped.webp" alt="Login Form" width="400px">

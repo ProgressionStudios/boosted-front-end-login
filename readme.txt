@@ -36,7 +36,7 @@ Visit the [GitHub repository](https://github.com/ProgressionStudios/boosted-fron
 
 1. Install and acivate the "Boosted Front-end Login" plugin.
 2. Click to "Add Block" within the block editor to add a new block. 
-3. You will find these 3 custom blocks: Login, Lost Password, and User Registration
+3. You will find the Login, Lost Password, and User Registration blocks under the heading "Boosted Front-End Login"
 
 == Frequently Asked Questions ==
 
