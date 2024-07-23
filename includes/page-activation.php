@@ -38,13 +38,13 @@ function check_if_page_exists($title, $content, $option_name) {
 }
 
 function create_login_pages() {
-    check_if_page_exists('Login', '<!-- wp:boosted/boosted-front-end-login /-->', 'boosted_login_page_id');
-    check_if_page_exists('Lost Password?', '<!-- wp:boosted/boosted-lost-password /-->', 'boosted_lost_password_page_id');
-    check_if_page_exists('Register', '<!-- wp:boosted/boosted-registration /-->', 'boosted_registration_page_id');
+    check_if_page_exists('Login', '<!-- wp:boosted/boosted-front-end-login /-->', 'boosted_frontend_login_login_page_id');
+    check_if_page_exists('Lost Password?', '<!-- wp:boosted/boosted-lost-password /-->', 'boosted_frontend_login_lost_password_page_id');
+    check_if_page_exists('Register', '<!-- wp:boosted/boosted-registration /-->', 'boosted_frontend_login_registration_page_id');
 }
 
 function lostpassword_page_link($lostpassword_url) {
-    $lost_page_id = get_option( 'boosted_lost_password_page_id' );
+    $lost_page_id = get_option( 'boosted_frontend_login_lost_password_page_id' );
 
     if ( $lost_page_id ) {
         return get_permalink( $lost_page_id );
@@ -54,7 +54,7 @@ function lostpassword_page_link($lostpassword_url) {
 }
 
 function registration_page_link($register_url) {
-    $registration_page_id = get_option( 'boosted_registration_page_id' );
+    $registration_page_id = get_option( 'boosted_frontend_login_registration_page_id' );
 
     if ( $registration_page_id ) {
         return get_permalink( $registration_page_id );

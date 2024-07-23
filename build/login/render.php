@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
     <?php else: ?>
         <?php
         $form_id = $attributes['uniqueId'];
-        $transient_id = 'login_error_' . $form_id;
+        $transient_id = 'boosted_frontend_login_login_error_' . $form_id;
         $login_error = get_transient($transient_id);
 
         if ($login_error ) :
@@ -37,8 +37,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
         );
         ?>
             <div class="boosted-front-end-login-error" role="alert">
-                <?php echo wp_kses(apply_filters('boosted_login_error_message', $login_error), $allowed_html); ?>
-                <?php delete_transient('login_error_' . $form_id); ?>
+                <?php echo wp_kses(apply_filters('boosted_frontend_login_error_message', $login_error), $allowed_html); ?>
+                <?php delete_transient('boosted_frontend_login_login_error_' . $form_id); ?>
             </div>
         <?php endif; ?>
         <form class="boosted-front-end boosted-front-end-login" method="post" action="<?php echo esc_url(add_query_arg(array('form_id' => $form_id, 't' => time()), admin_url('admin-post.php'))); ?>" name="Login-Form">

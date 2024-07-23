@@ -25,7 +25,7 @@ function front_end_login() {
 
         $user = wp_signon($creds, false);
         $form_id = sanitize_text_field($_POST['form_id']);
-        $transient_id = 'login_error_' . $form_id;
+        $transient_id = 'boosted_frontend_login_login_error_' . $form_id;
 
         if (is_wp_error($user)) {
             set_transient($transient_id, $user->get_error_message(), 60);

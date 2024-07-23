@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
     <?php
     $form_id = $attributes['uniqueId'];
-    $lost_password_error = get_transient('lost_password_error_' . $form_id);
-    $lost_password_message = get_transient('lost_password_message_' . $form_id);
+    $lost_password_error = get_transient('boosted_frontend_login_lost_password_error_' . $form_id);
+    $lost_password_message = get_transient('boosted_frontend_login_lost_password_message_' . $form_id);
 
     if ( $lost_password_error ) :
         $allowed_html = array(
@@ -19,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
         );
     ?>
         <div class="boosted-front-end-login-error" role="alert">
-            <?php echo wp_kses(apply_filters('boosted_lost_password_error_message', $lost_password_error), $allowed_html); ?>
-            <?php delete_transient( 'lost_password_error_' . $form_id ); ?>
+            <?php echo wp_kses(apply_filters('boosted_frontend_login_lost_password_error_message_', $lost_password_error), $allowed_html); ?>
+            <?php delete_transient( 'boosted_frontend_login_lost_password_error_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
     ?>
         <div class="boosted-front-end-login-success" role="alert">
             <?php echo wp_kses(apply_filters('boosted_lost_password_success_message', $lost_password_message), $allowed_html); ?>
-            <?php delete_transient( 'lost_password_message_' . $form_id ); ?>
+            <?php delete_transient( 'boosted_frontend_login_lost_password_message_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 

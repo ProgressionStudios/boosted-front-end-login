@@ -28,8 +28,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
     <?php
     $form_id = $attributes['uniqueId'];
     
-    $registration_error = get_transient( 'registration_error_' . $form_id );
-    $registration_message = get_transient( 'registration_message_' . $form_id );
+    $registration_error = get_transient( 'boosted_frontend_login_registration_error_' . $form_id );
+    $registration_message = get_transient( 'boosted_frontend_login_registration_message_' . $form_id );
     $verified = '';
     if (isset($_GET['verified']) && isset($_GET['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'verify_email_' . intval($_GET['user']))) {
         $verified = sanitize_text_field($_GET['verified']);
@@ -50,15 +50,15 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
     if ( $registration_error ) : ?>
         <div class="boosted-front-end-registration-error" role="alert">
-            <?php echo wp_kses(apply_filters('boosted_registration_error_message', $registration_error), $allowed_html); ?>
-            <?php delete_transient( 'registration_error_' . $form_id ); ?>
+            <?php echo wp_kses(apply_filters('boosted_frontend_login_registration_error_message', $registration_error), $allowed_html); ?>
+            <?php delete_transient( 'boosted_frontend_login_registration_error_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 
     <?php if ( $registration_message ) : ?>
         <div class="boosted-front-end-registration-success" role="alert">
-            <?php echo wp_kses(apply_filters('boosted_registration_success_message', $registration_message), $allowed_html); ?>
-            <?php delete_transient( 'registration_message_' . $form_id ); ?>
+            <?php echo wp_kses(apply_filters('boosted_frontend_login__registration_success_message', $registration_message), $allowed_html); ?>
+            <?php delete_transient( 'boosted_frontend_login_registration_message_' . $form_id ); ?>
         </div>
     <?php endif; ?>
 
