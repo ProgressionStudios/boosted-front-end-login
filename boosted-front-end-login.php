@@ -4,7 +4,7 @@
  * Description:       Add Front-end Login, Registration, & Lost Password blocks
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           0.1.0
+ * Version:           1.0.0
  * Author:            Michael Garcia
  * Author URI:        https://progressionstudios.com
  * License:           GPL-2.0-or-later

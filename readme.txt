@@ -3,7 +3,7 @@ Contributors:      ProgressionStudios
 Tags:              block, forms, login, registration
 Requires at least: 6.0
 Tested up to:      6.6
-Stable tag:        0.1.0
+Stable tag:        1.0.0
 Requires PHP:      7.4
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,20 +16,15 @@ Create Login, Registration, & Lost Password pages using the Block Editor.
 
 [View Demo](https://boosted-login.progressionstudios.com/)
 
-== Custom Blocks ==
-* **Login form
-* **Lost Password
-* **User Registration
-
 == Features ==
-* **Add forms to any pages using the block editor
-* **Login, Registration, & Lost Password pages are created automatically upon plugin activation
-* **Add custom redirects upon form submissions
-* **All options are managed within block editor
-* **Extremely lightweight plugin with no added CSS or JavaScript
-* **Built-in verification email for registration (New users are placed in "pending" role)
+* Add forms to any pages using the block editor
+* Login, Registration, & Lost Password pages are created automatically upon plugin activation
+* Add custom redirects upon form submissions
+* All options are managed within block editor
+* Extremely lightweight plugin with no added CSS or JavaScript
+* Built-in verification email for registration (New users are placed in "pending" role)
 
-Contribute
+== Contribute ==
 Visit the [GitHub repository](https://github.com/ProgressionStudios/boosted-front-end-login) for full source code and to report any bugs.
 
 == Installation ==
@@ -62,8 +57,8 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
-= 0.1.0 =
-* Release
+= 1.0.0 =
+* Initial Release
 
 == Upgrade Notice ==
 = 0.1.0 =
