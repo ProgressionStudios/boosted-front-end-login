@@ -1,6 +1,6 @@
 # Boosted Front-end Login
 
-<img src="http://boosted-login.progressionstudios.com/wp-content/uploads/2024/07/login-graphic.webp" alt="Boosted Front-end Login" width="400px">
+[![Boosted Front-end Login](https://wordpress.org/plugins/boosted-front-end-login/)](http://boosted-login.progressionstudios.com/wp-content/uploads/2024/07/login-graphic.webp)
 
 Create Login, Registration, & Lost Password pages using the Block Editor.
 
