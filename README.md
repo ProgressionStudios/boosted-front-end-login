@@ -1,8 +1,10 @@
 # Boosted Front-end Login
 
+<img src="http://boosted-login.progressionstudios.com/wp-content/uploads/2024/07/login-graphic.webp" alt="Boosted Front-end Login" width="400px">
+
 Create Login, Registration, & Lost Password pages using the Block Editor.
 
-[View Demo](https://boosted-login.progressionstudios.com/)
+[View Demo](https://boosted-login.progressionstudios.com/) | [Download Plugin on WordPress.org](https://wordpress.org/plugins/boosted-front-end-login/)
 
 ## Custom Blocks
 - Login form
@@ -22,4 +24,4 @@ Create Login, Registration, & Lost Password pages using the Block Editor.
 2. Click to **Add Block** within the block editor to add a new block. 
 3. You will find these 3 custom blocks: **Login, Lost Password, and User Registration**
 
-<img src="https://boosted-login.progressionstudios.com/wp-content/uploads/2024/06/blocks-cropped.webp" alt="Boosted Front-end Login" width="400px">
+<img src="https://boosted-login.progressionstudios.com/wp-content/uploads/2024/06/blocks-cropped.webp" alt="Login Form" width="400px">

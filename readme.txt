@@ -14,7 +14,23 @@ Boosted Front-end Login
 
 Create Login, Registration, & Lost Password pages using the Block Editor.
 
-View Demo: https://boosted-login.progressionstudios.com/
+[View Demo](https://boosted-login.progressionstudios.com/)
+
+== Custom Blocks ==
+* **Login form
+* **Lost Password
+* **User Registration
+
+== Features ==
+* **Add forms to any pages using the block editor
+* **Login, Registration, & Lost Password pages are created automatically upon plugin activation
+* **Add custom redirects upon form submissions
+* **All options are managed within block editor
+* **Extremely lightweight plugin with no added CSS or JavaScript
+* **Built-in verification email for registration (New users are placed in "pending" role)
+
+Contribute
+Visit the [GitHub repository](https://github.com/ProgressionStudios/boosted-front-end-login) for full source code and to report any bugs.
 
 == Installation ==
 
