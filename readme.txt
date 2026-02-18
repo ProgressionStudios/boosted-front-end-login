@@ -2,8 +2,8 @@
 Contributors:      ProgressionStudios
 Tags:              block, forms, login, registration
 Requires at least: 6.0
-Tested up to:      6.6
-Stable tag:        1.0.0
+Tested up to:      6.9.1
+Stable tag:        1.0.1
 Requires PHP:      7.4
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -56,6 +56,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 1.0.01 =
+* Tested with WordPress 6.9.1
+* Minor maintenance update
 
 = 1.0.0 =
 * Initial Release
